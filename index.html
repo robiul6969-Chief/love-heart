@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>I Love You ❤️</title>
 
 <style>
@@ -17,710 +16,672 @@ html,body{
     width:100%;
     height:100%;
     overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
     background:
-        radial-gradient(
-            circle at 50% 48%,
-            #300b29 0%,
-            #160714 38%,
-            #050205 72%,
-            #000000 100%
-        );
-
-    font-family:Arial,Helvetica,sans-serif;
+        radial-gradient(circle at 50% 70%, #28001d 0%, #0b0009 45%, #000 100%);
+    color:white;
 }
 
-
 /* =========================
-   BACKGROUND GLOW
+   LOADING SCREEN
 ========================= */
 
-.glow{
+#loading{
     position:fixed;
-
-    width:650px;
-    height:650px;
-
-    left:50%;
-    top:51%;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
+    inset:0;
+    z-index:1000;
     background:
-        radial-gradient(
-            circle,
-            rgba(255,20,147,.18),
-            rgba(255,20,147,.07) 40%,
-            transparent 70%
-        );
+        radial-gradient(circle at center,#220014,#050005 60%,#000);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transition:opacity 1.5s ease, visibility 1.5s ease;
+}
 
-    filter:blur(35px);
+.loader{
+    width:260px;
+    padding:28px;
+    border:1px solid rgba(255,80,150,.25);
+    border-radius:22px;
+    background:rgba(20,0,15,.75);
+    box-shadow:
+        0 0 30px rgba(255,0,120,.12),
+        inset 0 0 25px rgba(255,0,120,.05);
+    text-align:center;
+    backdrop-filter:blur(12px);
+}
 
-    animation:
-        glowPulse 5s ease-in-out infinite;
+.flower-icon{
+    font-size:42px;
+    animation:float 2s ease-in-out infinite;
+}
 
+.loader-title{
+    margin-top:10px;
+    font-family:Georgia,serif;
+    font-size:23px;
+}
+
+.loading-text{
+    margin-top:15px;
+    color:#b9a5b1;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+.progress{
+    width:100%;
+    height:5px;
+    margin-top:14px;
+    border-radius:10px;
+    overflow:hidden;
+    background:#241520;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#ff176f,#ff72b5);
+    box-shadow:0 0 12px #ff277a;
+    animation:load 4s linear forwards;
+}
+
+@keyframes load{
+    to{width:100%}
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+}
+
+/* =========================
+   MAIN SCENE
+========================= */
+
+#scene{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition:opacity 2s ease;
+}
+
+/* stars */
+
+.stars{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+}
+
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:#ff78bd;
+    box-shadow:0 0 9px #ff2786;
+    animation:twinkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:.15;transform:scale(.6)}
+    to{opacity:1;transform:scale(1.5)}
+}
+
+/* moon glow */
+
+.moon{
+    position:absolute;
+    width:420px;
+    height:420px;
+    left:50%;
+    top:58%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:radial-gradient(
+        circle,
+        rgba(255,20,130,.18),
+        rgba(255,0,100,.07) 35%,
+        transparent 70%
+    );
+    filter:blur(12px);
+}
+
+/* =========================
+   FALLING PETALS
+========================= */
+
+.petals{
+    position:absolute;
+    inset:0;
     pointer-events:none;
 }
 
-@keyframes glowPulse{
+.falling-petal{
+    position:absolute;
+    top:-40px;
+    color:#ff4b99;
+    font-size:22px;
+    filter:drop-shadow(0 0 8px #ff197a);
+    animation:fall linear forwards;
+}
 
-    0%,100%{
-        transform:
-            translate(-50%,-50%)
-            scale(.92);
+@keyframes fall{
+    0%{
+        transform:translate3d(0,-40px,0) rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
     }
 
     50%{
-        transform:
-            translate(-50%,-50%)
-            scale(1.08);
+        transform:translate3d(70px,50vh,0) rotate(180deg);
+    }
+
+    100%{
+        transform:translate3d(-40px,105vh,0) rotate(360deg);
+        opacity:0;
     }
 }
 
+/* =========================
+   GROUND
+========================= */
+
+.ground{
+    position:absolute;
+    bottom:-180px;
+    left:50%;
+    transform:translateX(-50%);
+    width:600px;
+    height:300px;
+    border-radius:50%;
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,20,120,.25),
+            rgba(120,0,60,.12) 45%,
+            transparent 70%
+        );
+    filter:blur(8px);
+}
+
+/* =========================
+   PLANT
+========================= */
+
+.plant{
+    position:absolute;
+    left:50%;
+    bottom:7%;
+    width:240px;
+    height:500px;
+    transform:translateX(-50%);
+}
+
+/* stem */
+
+.stem{
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:10px;
+    height:0;
+    transform:translateX(-50%);
+    border-radius:100px;
+    background:
+        linear-gradient(
+            90deg,
+            #163d27,
+            #42a85f,
+            #163d27
+        );
+    box-shadow:0 0 12px rgba(60,255,130,.2);
+    animation:growStem 3s ease-out 1s forwards;
+    transform-origin:bottom;
+}
+
+@keyframes growStem{
+    to{
+        height:330px;
+    }
+}
+
+/* leaves */
+
+.leaf{
+    position:absolute;
+    width:95px;
+    height:45px;
+    background:
+        linear-gradient(
+            135deg,
+            #287e49,
+            #6bd889,
+            #164f2e
+        );
+    border-radius:100% 0 100% 0;
+    opacity:0;
+    transform:scale(0);
+    box-shadow:0 0 12px rgba(60,255,130,.12);
+}
+
+.leaf.left{
+    left:30px;
+    bottom:145px;
+    transform-origin:right bottom;
+    rotate:-25deg;
+    animation:leafGrow 1.4s ease 3.3s forwards;
+}
+
+.leaf.right{
+    right:30px;
+    bottom:205px;
+    transform-origin:left bottom;
+    rotate:25deg;
+    animation:leafGrow 1.4s ease 3.8s forwards;
+}
+
+@keyframes leafGrow{
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* =========================
+   FLOWER
+========================= */
+
+.flower{
+    position:absolute;
+    left:50%;
+    bottom:320px;
+    width:170px;
+    height:170px;
+    transform:translateX(-50%) scale(.05);
+    opacity:0;
+    animation:bloom 2.5s cubic-bezier(.2,.8,.2,1) 4.5s forwards;
+}
+
+@keyframes bloom{
+    0%{
+        transform:translateX(-50%) scale(.05);
+        opacity:0;
+    }
+
+    60%{
+        transform:translateX(-50%) scale(1.15);
+        opacity:1;
+    }
+
+    100%{
+        transform:translateX(-50%) scale(1);
+        opacity:1;
+    }
+}
+
+.petal{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:75px;
+    height:110px;
+    transform-origin:50% 90%;
+    border-radius:50% 50% 45% 45%;
+    background:
+        radial-gradient(
+            ellipse at 45% 25%,
+            #ffb0d5,
+            #ff4f9b 40%,
+            #b60055 80%,
+            #65002f
+        );
+    box-shadow:
+        inset 0 0 12px rgba(255,255,255,.25),
+        0 0 20px rgba(255,0,110,.35);
+}
+
+.p1{transform:translate(-50%,-90%) rotate(0deg)}
+.p2{transform:translate(-50%,-90%) rotate(45deg)}
+.p3{transform:translate(-50%,-90%) rotate(90deg)}
+.p4{transform:translate(-50%,-90%) rotate(135deg)}
+.p5{transform:translate(-50%,-90%) rotate(180deg)}
+.p6{transform:translate(-50%,-90%) rotate(225deg)}
+.p7{transform:translate(-50%,-90%) rotate(270deg)}
+.p8{transform:translate(-50%,-90%) rotate(315deg)}
+
+.flower-center{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle,#ffeaa7,#ff9c2e 45%,#9e3b00);
+    box-shadow:
+        0 0 18px rgba(255,160,30,.7);
+    z-index:5;
+}
+
+/* =========================
+   TEXT
+========================= */
+
+.message{
+    position:absolute;
+    left:50%;
+    top:39%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    width:100%;
+    opacity:0;
+    animation:messageIn 2s ease 6.8s forwards;
+}
+
+.main-title{
+    font-size:clamp(38px,6vw,80px);
+    font-weight:700;
+    letter-spacing:7px;
+    background:linear-gradient(
+        90deg,
+        #ff72b7,
+        #fff,
+        #ff3e98
+    );
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 25px rgba(255,40,140,.4);
+}
+
+.subtitle{
+    margin-top:12px;
+    font-size:clamp(13px,2vw,21px);
+    letter-spacing:8px;
+    color:#f3d8e8;
+    text-shadow:0 0 12px rgba(255,70,160,.5);
+}
+
+@keyframes messageIn{
+    from{
+        opacity:0;
+        transform:translate(-50%,-40%) scale(.92);
+        filter:blur(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1);
+        filter:blur(0);
+    }
+}
 
 /* =========================
    TOP TITLE
 ========================= */
 
-.title{
-
-    position:fixed;
-
-    top:28px;
+.top-title{
+    position:absolute;
+    top:45px;
     left:50%;
-
     transform:translateX(-50%);
-
-    z-index:20;
-
-    white-space:nowrap;
-
-    font-size:
-        clamp(28px,4vw,46px);
-
-    font-weight:700;
-
-    letter-spacing:2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff4b9b,
-            #ffffff,
-            #ff4b9b
-        );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-
-    filter:
-        drop-shadow(0 0 8px #ff1493)
-        drop-shadow(0 0 22px #ff1493);
-}
-
-
-/* =========================
-   CANVAS
-========================= */
-
-canvas{
-
-    position:fixed;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    display:block;
-
-    pointer-events:none;
-}
-
-
-/* =========================
-   CENTER MESSAGE
-========================= */
-
-.center{
-
-    position:fixed;
-
-    left:50%;
-    top:53%;
-
-    transform:
-        translate(-50%,-50%);
-
-    z-index:10;
-
-    text-align:center;
-
-    pointer-events:none;
-}
-
-.center h1{
-
-    font-size:
-        clamp(35px,6vw,64px);
-
-    letter-spacing:3px;
-
-    font-weight:700;
-
-    white-space:nowrap;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #ffb8dc,
-            #ff3c9f
-        );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-
-    filter:
-        drop-shadow(0 0 8px #ff1493)
-        drop-shadow(0 0 25px #ff1493);
-}
-
-.center p{
-
-    margin-top:12px;
-
-    font-size:11px;
-
-    letter-spacing:6px;
-
-    color:
-        rgba(255,255,255,.72);
-}
-
-
-/* =========================
-   CREDIT
-========================= */
-
-.credit{
-
-    position:fixed;
-
-    left:50%;
-    bottom:20px;
-
-    transform:
-        translateX(-50%);
-
-    z-index:30;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:12px;
-
-    padding:9px 20px;
-
-    border:
-        1px solid
-        rgba(255,72,166,.65);
-
-    border-radius:30px;
-
-    background:
-        rgba(255,20,147,.08);
-
-    backdrop-filter:
-        blur(10px);
-
-    box-shadow:
-        0 0 12px
-        rgba(255,20,147,.35),
-
-        inset 0 0 14px
-        rgba(255,20,147,.08);
-
-    color:
-        rgba(255,255,255,.68);
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-    white-space:nowrap;
-}
-
-.credit .heart{
-
-    color:#ff4fa3;
-
-    font-size:14px;
-
-    filter:
-        drop-shadow(0 0 6px #ff1493);
-
-    animation:
-        heartbeat 1.4s ease-in-out infinite;
-}
-
-.credit .name{
-
-    color:#ff70b8;
-
+    font-size:clamp(25px,4vw,52px);
     font-weight:bold;
-
-    letter-spacing:4px;
-
+    color:#ff76b8;
     text-shadow:
-        0 0 7px #ff1493,
-        0 0 14px #ff1493;
+        0 0 10px #ff287e,
+        0 0 25px #ff287e;
+    white-space:nowrap;
 }
 
-@keyframes heartbeat{
-
-    0%,100%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.25);
-    }
+.top-title span{
+    color:#ff2e83;
 }
-
 
 /* =========================
-   MOBILE
+   FOOTER
 ========================= */
+
+.footer{
+    position:absolute;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%);
+    padding:10px 24px;
+    border:1px solid rgba(255,55,145,.5);
+    border-radius:30px;
+    background:rgba(30,0,20,.45);
+    color:#cdb7c7;
+    font-size:10px;
+    letter-spacing:4px;
+    white-space:nowrap;
+    box-shadow:
+        0 0 20px rgba(255,0,120,.15),
+        inset 0 0 15px rgba(255,0,120,.06);
+}
+
+.footer b{
+    color:#ff5aa7;
+}
+
+/* mobile */
 
 @media(max-width:600px){
 
-    .title{
-        top:22px;
-        font-size:28px;
+    .plant{
+        transform:translateX(-50%) scale(.75);
+        transform-origin:bottom center;
     }
 
-    .center h1{
-        font-size:32px;
+    .message{
+        top:38%;
     }
 
-    .center p{
+    .main-title{
+        letter-spacing:3px;
+    }
+
+    .subtitle{
+        letter-spacing:4px;
+    }
+
+    .top-title{
+        top:28px;
+    }
+
+    .footer{
+        bottom:15px;
         font-size:8px;
-        letter-spacing:3px;
-    }
-
-    .credit{
-        bottom:12px;
-        padding:8px 14px;
-        font-size:7px;
-    }
-
-    .credit .name{
-        letter-spacing:3px;
+        letter-spacing:2px;
     }
 }
 </style>
 </head>
 
-
 <body>
 
+<!-- ================= LOADING ================= -->
 
-<div class="glow"></div>
+<div id="loading">
 
+    <div class="loader">
 
-<div class="title">
-    I Love You ❤️
+        <div class="flower-icon">🌹</div>
+
+        <div class="loader-title">
+            Love.css
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+
+        <div class="loading-text">
+            GROWING DIGITAL PETALS...
+        </div>
+
+    </div>
+
 </div>
 
 
-<canvas id="heartCanvas"></canvas>
+<!-- ================= MAIN ================= -->
+
+<div id="scene">
+
+    <div class="stars" id="stars"></div>
+
+    <div class="moon"></div>
+
+    <div class="petals" id="petals"></div>
+
+    <div class="ground"></div>
+
+    <div class="top-title">
+        I Love You <span>♥</span>
+    </div>
 
 
-<div class="center">
+    <!-- MESSAGE -->
 
-    <h1>
-        I LOVE YOU
-    </h1>
+    <div class="message">
 
-    <p>
-        FOREVER • ALWAYS • ❤️
-    </p>
+        <div class="main-title">
+            I LOVE YOU
+        </div>
 
-</div>
+        <div class="subtitle">
+            FAVORITE JANNAT ♥
+        </div>
+
+    </div>
 
 
-<div class="credit">
+    <!-- PLANT -->
 
-    <span class="heart">♥</span>
+    <div class="plant">
 
-    <span>MADE WITH LOVE BY</span>
+        <div class="stem"></div>
 
-    <span class="name">ROBIUL</span>
+        <div class="leaf left"></div>
+        <div class="leaf right"></div>
 
-    <span class="heart">♥</span>
+        <div class="flower">
+
+            <div class="petal p1"></div>
+            <div class="petal p2"></div>
+            <div class="petal p3"></div>
+            <div class="petal p4"></div>
+            <div class="petal p5"></div>
+            <div class="petal p6"></div>
+            <div class="petal p7"></div>
+            <div class="petal p8"></div>
+
+            <div class="flower-center"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+        ♥ MADE WITH LOVE BY <b>ROBIUL</b> ♥
+    </div>
 
 </div>
 
 
 <script>
 
-/* ==========================================
-   CANVAS SETUP
-========================================== */
+/* =========================
+   STARS
+========================= */
 
-const canvas =
-    document.getElementById("heartCanvas");
+const stars = document.getElementById("stars");
 
-const ctx =
-    canvas.getContext("2d");
+for(let i=0;i<90;i++){
 
-let W = 0;
-let H = 0;
-let DPR = 1;
+    const star=document.createElement("div");
 
+    star.className="star";
 
-/* ==========================================
-   RESIZE
-========================================== */
+    star.style.left=Math.random()*100+"%";
+    star.style.top=Math.random()*100+"%";
 
-function resize(){
+    const size=1+Math.random()*3;
 
-    DPR =
-        Math.min(
-            window.devicePixelRatio || 1,
-            2
-        );
+    star.style.width=size+"px";
+    star.style.height=size+"px";
 
-    W =
-        window.innerWidth;
+    star.style.animationDelay=(Math.random()*3)+"s";
 
-    H =
-        window.innerHeight;
-
-    canvas.width =
-        W * DPR;
-
-    canvas.height =
-        H * DPR;
-
-    canvas.style.width =
-        W + "px";
-
-    canvas.style.height =
-        H + "px";
-
-    ctx.setTransform(
-        DPR,
-        0,
-        0,
-        DPR,
-        0,
-        0
-    );
-}
-
-resize();
-
-window.addEventListener(
-    "resize",
-    resize
-);
-
-
-/* ==========================================
-   HEART PARAMETRIC EQUATION
-========================================== */
-
-function heartPoint(t, scale){
-
-    const x =
-        16 *
-        Math.pow(
-            Math.sin(t),
-            3
-        );
-
-    const y =
-        13 * Math.cos(t)
-        - 5 * Math.cos(2*t)
-        - 2 * Math.cos(3*t)
-        - Math.cos(4*t);
-
-    return {
-
-        x: x * scale,
-
-        y: -y * scale
-    };
+    stars.appendChild(star);
 }
 
 
-/* ==========================================
-   HEART SIZE
-========================================== */
+/* =========================
+   FALLING PETALS
+========================= */
 
-function getScale(){
+const petals=document.getElementById("petals");
 
-    return Math.min(
-        W,
-        H
-    ) * 0.0205;
+function createPetal(){
+
+    const p=document.createElement("div");
+
+    p.className="falling-petal";
+
+    p.innerHTML="♥";
+
+    p.style.left=Math.random()*100+"%";
+
+    p.style.fontSize=(12+Math.random()*16)+"px";
+
+    const duration=5+Math.random()*5;
+
+    p.style.animationDuration=duration+"s";
+
+    p.style.animationDelay=(Math.random()*2)+"s";
+
+    petals.appendChild(p);
+
+    setTimeout(()=>{
+        p.remove();
+    },(duration+3)*1000);
 }
 
 
-/* ==========================================
-   HEART CENTER
-========================================== */
+/* petals continuously */
 
-function getCenter(){
+setInterval(createPetal,450);
 
-    return {
 
-        x: W / 2,
+/* =========================
+   LOADING FINISH
+========================= */
 
-        y:
-            H * 0.53
-    };
-}
+setTimeout(()=>{
 
+    const loading=document.getElementById("loading");
+    const scene=document.getElementById("scene");
 
-/* ==========================================
-   MANY I LOVE YOU
-========================================== */
+    loading.style.opacity="0";
+    loading.style.visibility="hidden";
 
-const TOTAL =
-    700;
+    scene.style.opacity="1";
 
-
-/* ==========================================
-   PARTICLES
-========================================== */
-
-const particles = [];
-
-for(let i=0;i<100;i++){
-
-    particles.push({
-
-        x:
-            Math.random() * W,
-
-        y:
-            Math.random() * H,
-
-        size:
-            1 + Math.random()*2.5,
-
-        speed:
-            .08 + Math.random()*.25,
-
-        alpha:
-            .25 + Math.random()*.7
-    });
-}
-
-
-/* ==========================================
-   DRAW BACKGROUND PARTICLES
-========================================== */
-
-function drawParticles(){
-
-    for(const p of particles){
-
-        p.y -= p.speed;
-
-        if(p.y < -10){
-
-            p.y =
-                H + 10;
-
-            p.x =
-                Math.random()*W;
-        }
-
-        ctx.beginPath();
-
-        ctx.arc(
-            p.x,
-            p.y,
-            p.size,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fillStyle =
-            `rgba(255,80,180,${p.alpha})`;
-
-        ctx.shadowColor =
-            "#ff1493";
-
-        ctx.shadowBlur =
-            10;
-
-        ctx.fill();
-    }
-
-    ctx.shadowBlur = 0;
-}
-
-
-/* ==========================================
-   MAIN ANIMATION
-========================================== */
-
-let time = 0;
-
-
-/*
-   This is intentionally slow.
-
-   The small "I love you"
-   move smoothly around
-   the heart.
-
-   They DO NOT rotate.
-*/
-
-function animate(){
-
-    requestAnimationFrame(
-        animate
-    );
-
-    ctx.clearRect(
-        0,
-        0,
-        W,
-        H
-    );
-
-
-    drawParticles();
-
-
-    const center =
-        getCenter();
-
-    const scale =
-        getScale();
-
-
-    /*
-       Very smooth movement.
-    */
-
-    time += 0.00075;
-
-
-    /* ======================================
-       DRAW 700 SMALL WORDS
-    ====================================== */
-
-    ctx.textAlign =
-        "center";
-
-    ctx.textBaseline =
-        "middle";
-
-    ctx.font =
-        "bold 8px Arial";
-
-
-    for(let i=0;i<TOTAL;i++){
-
-        /*
-           Evenly distribute words.
-        */
-
-        const base =
-            (i / TOTAL) *
-            Math.PI * 2;
-
-
-        /*
-           Smooth movement.
-        */
-
-        const t =
-            base + time;
-
-
-        const pos =
-            heartPoint(
-                t,
-                scale
-            );
-
-
-        const x =
-            center.x + pos.x;
-
-        const y =
-            center.y + pos.y;
-
-
-        /*
-           Slight natural brightness.
-        */
-
-        const alpha =
-            .45 +
-            (
-                Math.sin(
-                    t * 2.2
-                ) + 1
-            ) * .22;
-
-
-        /*
-           Glow.
-        */
-
-        ctx.shadowColor =
-            "#ff1493";
-
-        ctx.shadowBlur =
-            7;
-
-
-        ctx.fillStyle =
-            `rgba(255,180,220,${alpha})`;
-
-
-        /*
-           IMPORTANT:
-
-           No rotate() here.
-
-           So every "I love you"
-           remains straight.
-        */
-
-        ctx.fillText(
-            "I love you",
-            x,
-            y
-        );
-    }
-
-
-    ctx.shadowBlur = 0;
-}
-
-
-/* ==========================================
-   START
-========================================== */
-
-animate();
+},4300);
 
 </script>
 

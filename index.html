@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>I Love You ❤️</title>
 
 <style>
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 html,body{
@@ -20,97 +21,107 @@ html,body{
 
 body{
     background:
-        radial-gradient(circle at center,
-        #3b102e 0%,
-        #160918 32%,
-        #050208 72%,
-        #000 100%);
-    font-family:Arial,sans-serif;
-    perspective:1200px;
+        radial-gradient(
+            circle at 50% 48%,
+            #310b29 0%,
+            #150713 35%,
+            #050205 72%,
+            #000 100%
+        );
+
+    font-family:Arial, sans-serif;
+    color:white;
 }
 
-/* BACKGROUND GLOW */
 
-.bgGlow{
+/* ================= BACKGROUND ================= */
+
+.bg-glow{
     position:fixed;
-    width:650px;
-    height:650px;
+    width:700px;
+    height:700px;
+
     left:50%;
-    top:50%;
+    top:52%;
+
     transform:translate(-50%,-50%);
+
     border-radius:50%;
 
-    background:radial-gradient(
-        circle,
-        rgba(255,40,150,.24),
-        rgba(180,0,100,.08) 40%,
-        transparent 70%
-    );
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,20,147,.22),
+            rgba(255,20,147,.08) 40%,
+            transparent 70%
+        );
 
     filter:blur(25px);
-    animation:bgPulse 4s ease-in-out infinite;
+
+    animation:pulse 4s ease-in-out infinite;
 }
 
-@keyframes bgPulse{
-    0%,100%{transform:translate(-50%,-50%) scale(.9)}
-    50%{transform:translate(-50%,-50%) scale(1.15)}
+@keyframes pulse{
+    0%,100%{
+        transform:translate(-50%,-50%) scale(.92);
+    }
+
+    50%{
+        transform:translate(-50%,-50%) scale(1.08);
+    }
 }
 
 
-/* TITLE */
+/* ================= TOP TITLE ================= */
 
 .title{
     position:fixed;
+
     top:28px;
     left:50%;
+
     transform:translateX(-50%);
 
-    z-index:20;
-
-    font-size:clamp(25px,4vw,45px);
-    font-weight:bold;
-    letter-spacing:2px;
+    z-index:50;
 
     white-space:nowrap;
 
-    background:linear-gradient(
-        90deg,
-        #ff4f9a,
-        #fff,
-        #ff65ad
-    );
+    font-size:clamp(27px,4vw,46px);
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff4d9d,
+            #ffffff,
+            #ff4d9d
+        );
 
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 
-    filter:drop-shadow(0 0 15px #ff3f9f);
+    filter:
+        drop-shadow(0 0 10px #ff1493)
+        drop-shadow(0 0 25px #ff1493);
 }
 
 
-/* ROTATING HEART SCENE */
+/* ================= HEART ================= */
 
 .scene{
     position:absolute;
 
+    width:min(700px,92vw);
+    height:min(680px,76vh);
+
     left:50%;
     top:53%;
 
-    width:min(650px,90vw);
-    height:min(650px,75vh);
-
-    transform:
-        translate(-50%,-50%)
-        rotateX(0deg)
-        rotateY(0deg);
+    transform:translate(-50%,-50%);
 }
-
-
-/*
-    THIS IS THE IMPORTANT PART
-
-    Thousands of I LOVE YOU stay together
-    and the WHOLE group rotates.
-*/
 
 .heart{
     position:absolute;
@@ -120,92 +131,39 @@ body{
 
     left:0;
     top:0;
-
-    transform-style:preserve-3d;
-
-    animation:
-        rotateHeart 12s linear infinite,
-        heartBeat 2.2s ease-in-out infinite;
 }
 
 
-@keyframes rotateHeart{
-
-    0%{
-        transform:rotateZ(0deg) rotateY(0deg);
-    }
-
-    25%{
-        transform:rotateZ(90deg) rotateY(12deg);
-    }
-
-    50%{
-        transform:rotateZ(180deg) rotateY(0deg);
-    }
-
-    75%{
-        transform:rotateZ(270deg) rotateY(-12deg);
-    }
-
-    100%{
-        transform:rotateZ(360deg) rotateY(0deg);
-    }
-}
-
-
-@keyframes heartBeat{
-
-    0%,100%{
-        scale:1;
-    }
-
-    50%{
-        scale:1.045;
-    }
-}
-
-
-/* EACH I LOVE YOU */
+/* ================= SMALL I LOVE YOU ================= */
 
 .love{
     position:absolute;
 
-    color:#ffb6da;
-
-    font-size:10px;
-    font-weight:bold;
-
     white-space:nowrap;
 
-    transform-style:preserve-3d;
+    transform:
+        translate(-50%,-50%) !important;
+
+    color:#ffb9dc;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:.1px;
 
     text-shadow:
         0 0 4px #ff69b4,
-        0 0 8px #ff1493,
-        0 0 15px #ff1493,
-        0 0 25px rgba(255,20,147,.8);
+        0 0 9px #ff1493,
+        0 0 17px #ff1493;
 
-    opacity:.85;
+    pointer-events:none;
 
-    transition:opacity .3s;
-
-    animation:textGlow 1.8s ease-in-out infinite alternate;
+    user-select:none;
 }
 
 
-@keyframes textGlow{
-
-    from{
-        opacity:.45;
-    }
-
-    to{
-        opacity:1;
-    }
-}
-
-
-/* CENTER */
+/* ================= CENTER ================= */
 
 .center{
     position:absolute;
@@ -215,63 +173,72 @@ body{
 
     transform:translate(-50%,-50%);
 
-    z-index:10;
-
     text-align:center;
+
+    z-index:20;
+
+    width:100%;
 
     pointer-events:none;
 }
 
 .center h1{
-
-    font-size:clamp(28px,6vw,60px);
-
-    letter-spacing:3px;
-
-    background:linear-gradient(
-        135deg,
-        white,
-        #ffb6da,
-        #ff3f9f
+    font-size:clamp(
+        34px,
+        6vw,
+        64px
     );
+
+    font-weight:bold;
+
+    letter-spacing:4px;
+
+    line-height:1.05;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #ffb7db,
+            #ff3f9f
+        );
 
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 
     filter:
         drop-shadow(0 0 8px #ff1493)
-        drop-shadow(0 0 25px #ff1493);
+        drop-shadow(0 0 24px #ff1493);
 }
 
 .center p{
-
-    margin-top:8px;
-
-    color:rgba(255,255,255,.65);
+    margin-top:13px;
 
     font-size:11px;
 
-    letter-spacing:5px;
+    letter-spacing:6px;
+
+    color:rgba(255,255,255,.7);
 }
 
 
-/* PARTICLES */
+/* ================= PARTICLES ================= */
 
 .particle{
-
     position:fixed;
 
     border-radius:50%;
 
-    background:#ff7fbd;
+    background:#ff69b4;
 
     box-shadow:
-        0 0 7px #ff1493,
+        0 0 6px #ff1493,
         0 0 15px #ff1493;
 
     pointer-events:none;
 
-    animation:floatUp linear infinite;
+    animation:
+        floatUp linear infinite;
 }
 
 @keyframes floatUp{
@@ -296,18 +263,47 @@ body{
 }
 
 
-/* FOOTER */
+/* ================= PREMIUM CREDIT ================= */
 
-.footer{
-
+.credit{
     position:fixed;
 
-    bottom:18px;
     left:50%;
+    bottom:20px;
 
     transform:translateX(-50%);
 
-    color:rgba(255,255,255,.35);
+    z-index:100;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:13px;
+
+    padding:10px 22px;
+
+    min-width:260px;
+
+    border:1px solid rgba(255,72,166,.65);
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,20,147,.14),
+            rgba(255,255,255,.04)
+        );
+
+    box-shadow:
+        0 0 10px rgba(255,20,147,.35),
+        inset 0 0 15px rgba(255,20,147,.08);
+
+    backdrop-filter:blur(10px);
+
+    color:rgba(255,255,255,.72);
 
     font-size:10px;
 
@@ -316,14 +312,49 @@ body{
     white-space:nowrap;
 }
 
+.credit .heart-icon{
+    color:#ff4fa3;
 
-/* MOBILE */
+    font-size:14px;
+
+    filter:
+        drop-shadow(0 0 6px #ff1493);
+
+    animation:
+        heartBeat 1.4s ease-in-out infinite;
+}
+
+.credit .name{
+    color:#ff70b8;
+
+    font-weight:bold;
+
+    letter-spacing:4px;
+
+    text-shadow:
+        0 0 7px #ff1493,
+        0 0 15px rgba(255,20,147,.8);
+}
+
+@keyframes heartBeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.25);
+    }
+}
+
+
+/* ================= MOBILE ================= */
 
 @media(max-width:600px){
 
     .scene{
-        width:105vw;
-        height:65vh;
+        width:108vw;
+        height:67vh;
     }
 
     .love{
@@ -331,7 +362,7 @@ body{
     }
 
     .center h1{
-        font-size:30px;
+        font-size:31px;
     }
 
     .center p{
@@ -339,26 +370,54 @@ body{
         letter-spacing:3px;
     }
 
+    .credit{
+        bottom:12px;
+
+        padding:8px 15px;
+
+        min-width:auto;
+
+        font-size:8px;
+
+        letter-spacing:2px;
+    }
+
+    .credit .name{
+        letter-spacing:3px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="bgGlow"></div>
 
+<!-- Background -->
+<div class="bg-glow"></div>
+
+
+<!-- Title -->
 <div class="title">
     I Love You ❤️
 </div>
 
 
-<div class="scene" id="scene">
+<!-- Heart -->
+<div class="scene">
 
     <div class="heart" id="heart">
 
+        <!-- Center message -->
         <div class="center">
-            <h1>I LOVE YOU</h1>
-            <p>FOREVER • ALWAYS • ❤️</p>
+
+            <h1>
+                I LOVE YOU
+            </h1>
+
+            <p>
+                FOREVER • ALWAYS • ❤️
+            </p>
+
         </div>
 
     </div>
@@ -366,216 +425,243 @@ body{
 </div>
 
 
-<div class="footer">
-    MADE WITH LOVE ✨
+<!-- Premium Credit -->
+<div class="credit">
+
+    <span class="heart-icon">♥</span>
+
+    <span>
+        MADE WITH LOVE BY
+    </span>
+
+    <span class="name">
+        ROBIUL
+    </span>
+
+    <span class="heart-icon">♥</span>
+
 </div>
 
 
 <script>
 
 /* =========================================
-   CREATE THE CONNECTED HEART
+   HEART SETTINGS
 ========================================= */
 
-const heart = document.getElementById("heart");
+const heart =
+    document.getElementById("heart");
 
-const total = 850;
-
-const width = heart.clientWidth;
-const height = heart.clientHeight;
-
-const centerX = width / 2;
-const centerY = height / 2;
-
-const scale = Math.min(width,height) / 38;
-
-
-/*
-   Mathematical heart
-*/
-
-for(let i=0;i<total;i++){
-
-    const t =
-        Math.PI * 2 * i / total;
-
-
-    const x =
-        16 * Math.pow(Math.sin(t),3);
-
-
-    const y =
-        13 * Math.cos(t)
-        - 5 * Math.cos(2*t)
-        - 2 * Math.cos(3*t)
-        - Math.cos(4*t);
-
-
-    /*
-       Add several layers.
-       This makes the heart look like
-       thousands of words are tied together.
-    */
-
-    const layer =
-        (i % 7) - 3;
-
-
-    const xPos =
-        centerX +
-        x * scale +
-        layer * 1.7;
-
-
-    const yPos =
-        centerY -
-        y * scale +
-        layer * 1.7;
-
-
-    const love =
-        document.createElement("div");
-
-
-    love.className="love";
-
-
-    love.innerHTML =
-        i % 5 === 0
-        ? "I LOVE YOU ❤️"
-        : "I love you";
-
-
-    love.style.left =
-        xPos+"px";
-
-
-    love.style.top =
-        yPos+"px";
-
-
-    /*
-       Follow the heart curve
-    */
-
-    const angle =
-        Math.atan2(y,x) *
-        180 / Math.PI;
-
-
-    love.style.transform =
-        `
-        translate(-50%,-50%)
-        rotate(${angle+90}deg)
-        translateZ(${layer*5}px)
-        `;
-
-
-    /*
-       Slightly different glow timing
-    */
-
-    love.style.animationDelay =
-        (Math.random()*2)+"s";
-
-
-    heart.appendChild(love);
-}
+const total =
+    900;
 
 
 /* =========================================
-   FLOATING PARTICLES
+   HEART DIMENSIONS
 ========================================= */
 
-for(let i=0;i<100;i++){
+function setup(){
 
-    const p =
+    const width =
+        heart.clientWidth;
+
+    const height =
+        heart.clientHeight;
+
+    const centerX =
+        width / 2;
+
+    const centerY =
+        height / 2;
+
+    const scale =
+        Math.min(width,height) / 38;
+
+
+    /* =====================================
+       CREATE 900 SMALL I LOVE YOU
+    ===================================== */
+
+    const words=[];
+
+
+    for(let i=0;i<total;i++){
+
+        const love =
+            document.createElement("div");
+
+        love.className="love";
+
+        love.textContent =
+            i % 9 === 0
+            ? "I LOVE YOU ♥"
+            : "I love you";
+
+        love.dataset.index=i;
+
+        heart.appendChild(love);
+
+        words.push(love);
+    }
+
+
+    /* =====================================
+       HEART EQUATION
+    ===================================== */
+
+    function heartPosition(t){
+
+        const x =
+            16 *
+            Math.pow(
+                Math.sin(t),
+                3
+            );
+
+        const y =
+            13*Math.cos(t)
+            -5*Math.cos(2*t)
+            -2*Math.cos(3*t)
+            -Math.cos(4*t);
+
+        return{
+
+            x:
+                centerX +
+                x*scale,
+
+            y:
+                centerY -
+                y*scale
+        };
+    }
+
+
+    /* =====================================
+       ANIMATION
+       
+       ONLY SMALL WORDS MOVE.
+
+       HEART NEVER ROTATES.
+
+       TEXT NEVER TURNS UPSIDE DOWN.
+    ===================================== */
+
+    let time=0;
+
+
+    function animate(){
+
+        time += 0.0017;
+
+
+        words.forEach(
+            (love,i)=>{
+
+                const base =
+                    (i/total) *
+                    Math.PI*2;
+
+
+                const t =
+                    base + time;
+
+
+                const pos =
+                    heartPosition(t);
+
+
+                /*
+                   Tiny natural movement
+                */
+
+                const wave =
+                    Math.sin(t*5)*1.2;
+
+
+                love.style.left =
+                    (pos.x+wave)+"px";
+
+
+                love.style.top =
+                    (pos.y+wave)+"px";
+
+
+                /*
+                   IMPORTANT:
+
+                   Text stays straight.
+                */
+
+                love.style.transform =
+                    "translate(-50%,-50%)";
+
+
+                /*
+                   Soft brightness variation
+                */
+
+                const glow =
+                    .68 +
+                    Math.sin(t*3)*.2;
+
+                love.style.opacity =
+                    glow;
+            }
+        );
+
+
+        requestAnimationFrame(
+            animate
+        );
+    }
+
+
+    animate();
+}
+
+
+/* Start */
+setup();
+
+
+/* =========================================
+   BACKGROUND PARTICLES
+========================================= */
+
+for(let i=0;i<120;i++){
+
+    const particle =
         document.createElement("div");
 
-    p.className="particle";
+    particle.className="particle";
 
-    p.style.left =
+    particle.style.left =
         Math.random()*100+"vw";
 
+
     const size =
-        1 + Math.random()*4;
+        1+Math.random()*4;
 
-    p.style.width=size+"px";
-    p.style.height=size+"px";
+    particle.style.width =
+        size+"px";
 
-    p.style.animationDuration =
-        5 + Math.random()*12+"s";
+    particle.style.height =
+        size+"px";
 
-    p.style.animationDelay =
+
+    particle.style.animationDuration =
+        6+Math.random()*12+"s";
+
+
+    particle.style.animationDelay =
         -Math.random()*15+"s";
 
-    document.body.appendChild(p);
+
+    document.body.appendChild(
+        particle
+    );
 }
-
-
-/* =========================================
-   MOUSE 3D CONTROL
-========================================= */
-
-const scene =
-    document.getElementById("scene");
-
-
-document.addEventListener(
-    "mousemove",
-    e => {
-
-        const x =
-            (e.clientX /
-            window.innerWidth - .5);
-
-
-        const y =
-            (e.clientY /
-            window.innerHeight - .5);
-
-
-        scene.style.transform =
-            `
-            translate(-50%,-50%)
-            rotateX(${-y*12}deg)
-            rotateY(${x*12}deg)
-            `;
-    }
-);
-
-
-/* =========================================
-   TOUCH CONTROL
-========================================= */
-
-document.addEventListener(
-    "touchmove",
-    e => {
-
-        const touch =
-            e.touches[0];
-
-
-        const x =
-            touch.clientX /
-            window.innerWidth - .5;
-
-
-        const y =
-            touch.clientY /
-            window.innerHeight - .5;
-
-
-        scene.style.transform =
-            `
-            translate(-50%,-50%)
-            rotateX(${-y*8}deg)
-            rotateY(${x*8}deg)
-            `;
-    },
-    {passive:true}
-);
 
 </script>
 

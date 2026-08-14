@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background:
+        radial-gradient(circle at 50% 45%, #260b20 0%, #100713 35%, #030207 75%);
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: white;
+}
+
+/* ================= BACKGROUND ================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+        circle,
+        rgba(255, 50, 150, 0.20),
+        rgba(255, 0, 100, 0.08) 35%,
+        transparent 70%
+    );
+    filter: blur(20px);
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%,100% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: .65;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 1;
+    }
+}
+
+/* ================= TITLE ================= */
+
+.title {
+    position: fixed;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+
+    text-align: center;
+    white-space: nowrap;
+
+    font-size: clamp(24px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    background: linear-gradient(
+        90deg,
+        #ff7eb3,
+        #ffffff,
+        #ff4f9a
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter: drop-shadow(0 0 12px rgba(255, 80, 160, .8));
+
+    animation: titleFloat 3s ease-in-out infinite;
+}
+
+.subtitle {
+    position: fixed;
+    top: 88px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 20;
+
+    color: rgba(255,255,255,.65);
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+@keyframes titleFloat {
+    0%,100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-6px);
+    }
+}
+
+/* ================= HEART ================= */
+
+.heart-area {
+    position: absolute;
+    width: min(650px, 90vw);
+    height: min(650px, 80vh);
+
+    left: 50%;
+    top: 53%;
+
+    transform:
+        translate(-50%, -50%)
+        perspective(900px);
+
+    transition: transform .15s ease-out;
+}
+
+.heart-text {
+    position: absolute;
+
+    color: #ffc0df;
+
+    font-size: clamp(7px, 1vw, 11px);
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transform-origin: center;
+
+    text-shadow:
+        0 0 4px #ff69b4,
+        0 0 9px #ff3f9f,
+        0 0 18px rgba(255, 50, 150, .9);
+
+    opacity: .82;
+
+    animation:
+        textGlow 2s ease-in-out infinite alternate,
+        textFloat 4s ease-in-out infinite;
+}
+
+@keyframes textGlow {
+
+    from {
+        opacity: .45;
+        filter: blur(.2px);
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+}
+
+@keyframes textFloat {
+
+    0%,100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: -2px;
+    }
+
+}
+
+/* ================= CENTER ================= */
+
+.center-message {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 10;
+
+    text-align: center;
+
+    pointer-events: none;
+
+    animation: centerBeat 1.8s ease-in-out infinite;
+}
+
+.center-message .main {
+
+    font-size: clamp(28px, 6vw, 58px);
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #ffb5d8,
+        #ff4f9a
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter:
+        drop-shadow(0 0 8px #ff4f9a)
+        drop-shadow(0 0 22px rgba(255, 50, 150, .8));
+}
+
+.center-message .small {
+
+    margin-top: 8px;
+
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    color: rgba(255,255,255,.65);
+}
+
+@keyframes centerBeat {
+
+    0%,100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+
+}
+
+/* ================= PARTICLES ================= */
+
+.particle {
+
+    position: fixed;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+
+    background: #ff9ac8;
+
+    box-shadow:
+        0 0 5px #ff69b4,
+        0 0 12px #ff69b4;
+
+    pointer-events: none;
+
+    animation: particleMove linear infinite;
+}
+
+@keyframes particleMove {
+
+    from {
+        transform: translateY(110vh) scale(.2);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-10vh) scale(1);
+        opacity: 0;
+    }
+
+}
+
+/* ================= BOTTOM ================= */
+
+.footer {
+
+    position: fixed;
+
+    bottom: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: rgba(255,255,255,.35);
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    z-index: 20;
+
+    white-space: nowrap;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    .subtitle {
+        top: 75px;
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+
+    .heart-area {
+        width: 100vw;
+        height: 65vh;
+        top: 52%;
+    }
+
+    .center-message .small {
+        font-size: 9px;
+    }
+
+    .footer {
+        font-size: 9px;
+        bottom: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="background">
+    <div class="glow"></div>
+</div>
+
+<!-- TITLE -->
+<div class="title">
+    I Love You ❤️
+</div>
+
+<div class="subtitle">
+    Made with love
+</div>
+
+<!-- HEART -->
+<div class="heart-area" id="heart">
+
+    <div class="center-message">
+        <div class="main">I LOVE YOU</div>
+        <div class="small">FOREVER • ❤️ • ALWAYS</div>
+    </div>
+
+</div>
+
+<div class="footer">
+    A little heart, made just for you ✨
+</div>
+
+
+<script>
+
+/* =====================================================
+   HEART TEXT
+===================================================== */
+
+const heart = document.getElementById("heart");
+
+const total = 420;
+
+const width = heart.clientWidth;
+const height = heart.clientHeight;
+
+const centerX = width / 2;
+const centerY = height / 2;
+
+const scale = Math.min(width, height) / 38;
+
+for (let i = 0; i < total; i++) {
+
+    const t = Math.PI * 2 * i / total;
+
+    /*
+       Mathematical heart equation
+    */
+
+    const x =
+        16 * Math.pow(Math.sin(t), 3);
+
+    const y =
+        13 * Math.cos(t)
+        - 5 * Math.cos(2 * t)
+        - 2 * Math.cos(3 * t)
+        - Math.cos(4 * t);
+
+    const posX =
+        centerX + x * scale;
+
+    const posY =
+        centerY - y * scale;
+
+    const text =
+        document.createElement("div");
+
+    text.className = "heart-text";
+
+    text.innerHTML =
+        i % 3 === 0
+        ? "I LOVE YOU ❤️"
+        : "I love you";
+
+    text.style.left =
+        posX + "px";
+
+    text.style.top =
+        posY + "px";
+
+    /*
+       Rotation follows the heart curve
+    */
+
+    const angle =
+        Math.atan2(y, x) * 180 / Math.PI;
+
+    text.style.transform =
+        `translate(-50%, -50%) rotate(${angle + 90}deg)`;
+
+    /*
+       Random animation timing
+    */
+
+    text.style.animationDelay =
+        `${Math.random() * 2}s`;
+
+    heart.appendChild(text);
+}
+
+
+/* =====================================================
+   FLOATING PARTICLES
+===================================================== */
+
+for (let i = 0; i < 90; i++) {
+
+    const particle =
+        document.createElement("div");
+
+    particle.className = "particle";
+
+    particle.style.left =
+        Math.random() * 100 + "vw";
+
+    particle.style.animationDuration =
+        (5 + Math.random() * 10) + "s";
+
+    particle.style.animationDelay =
+        (-Math.random() * 15) + "s";
+
+    const size =
+        1 + Math.random() * 4;
+
+    particle.style.width =
+        size + "px";
+
+    particle.style.height =
+        size + "px";
+
+    document.body.appendChild(particle);
+}
+
+
+/* =====================================================
+   MOUSE PARALLAX EFFECT
+===================================================== */
+
+const heartArea =
+    document.querySelector(".heart-area");
+
+document.addEventListener("mousemove", (event) => {
+
+    const x =
+        (event.clientX / window.innerWidth - .5);
+
+    const y =
+        (event.clientY / window.innerHeight - .5);
+
+    heartArea.style.transform =
+        `
+        translate(-50%, -50%)
+        perspective(900px)
+        rotateY(${x * 8}deg)
+        rotateX(${-y * 8}deg)
+        scale(1.02)
+        `;
+});
+
+
+/* =====================================================
+   TOUCH EFFECT FOR MOBILE
+===================================================== */
+
+document.addEventListener("touchmove", (event) => {
+
+    const touch =
+        event.touches[0];
+
+    const x =
+        (touch.clientX / window.innerWidth - .5);
+
+    const y =
+        (touch.clientY / window.innerHeight - .5);
+
+    heartArea.style.transform =
+        `
+        translate(-50%, -50%)
+        perspective(900px)
+        rotateY(${x * 6}deg)
+        rotateX(${-y * 6}deg)
+        scale(1.02)
+        `;
+
+}, { passive: true });
+
+
+/* =====================================================
+   HEART CLICK EFFECT
+===================================================== */
+
+document.addEventListener("click", (event) => {
+
+    for (let i = 0; i < 12; i++) {
+
+        const spark =
+            document.createElement("div");
+
+        spark.style.position = "fixed";
+
+        spark.style.left =
+            event.clientX + "px";
+
+        spark.style.top =
+            event.clientY + "px";
+
+        spark.style.width = "6px";
+        spark.style.height = "6px";
+
+        spark.style.borderRadius = "50%";
+
+        spark.style.background = "#ff8fc5";
+
+        spark.style.boxShadow =
+            "0 0 12px #ff4f9a";
+
+        spark.style.pointerEvents =
+            "none";
+
+        spark.style.zIndex = "100";
+
+        const angle =
+            Math.random() * Math.PI * 2;
+
+        const distance =
+            40 + Math.random() * 100;
+
+        const dx =
+            Math.cos(angle) * distance;
+
+        const dy =
+            Math.sin(angle) * distance;
+
+        spark.animate(
+            [
+                {
+                    transform: "translate(0,0) scale(1)",
+                    opacity: 1
+                },
+                {
+                    transform:
+                        `translate(${dx}px,${dy}px) scale(0)`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration: 700 + Math.random() * 500,
+                easing: "cubic-bezier(.2,.8,.3,1)"
+            }
+        );
+
+        document.body.appendChild(spark);
+
+        setTimeout(() => {
+            spark.remove();
+        }, 1300);
+    }
+
+});
+
+</script>
+
+</body>
+</html>

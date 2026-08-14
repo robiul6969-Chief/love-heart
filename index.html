@@ -3,390 +3,383 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>For You ❤️</title>
+<title>I Love You ❤️</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
 }
 
-body {
+body{
     background:
-        radial-gradient(circle at 50% 45%, #260b20 0%, #100713 35%, #030207 75%);
-    font-family: "Segoe UI", Arial, sans-serif;
-    color: white;
+        radial-gradient(circle at center,
+        #3b102e 0%,
+        #160918 32%,
+        #050208 72%,
+        #000 100%);
+    font-family:Arial,sans-serif;
+    perspective:1200px;
 }
 
-/* ================= BACKGROUND ================= */
+/* BACKGROUND GLOW */
 
-.background {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
+.bgGlow{
+    position:fixed;
+    width:650px;
+    height:650px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
 
-.glow {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(
+    background:radial-gradient(
         circle,
-        rgba(255, 50, 150, 0.20),
-        rgba(255, 0, 100, 0.08) 35%,
+        rgba(255,40,150,.24),
+        rgba(180,0,100,.08) 40%,
         transparent 70%
     );
-    filter: blur(20px);
-    animation: glowPulse 3s ease-in-out infinite;
+
+    filter:blur(25px);
+    animation:bgPulse 4s ease-in-out infinite;
 }
 
-@keyframes glowPulse {
-    0%,100% {
-        transform: translate(-50%, -50%) scale(0.9);
-        opacity: .65;
-    }
-
-    50% {
-        transform: translate(-50%, -50%) scale(1.15);
-        opacity: 1;
-    }
+@keyframes bgPulse{
+    0%,100%{transform:translate(-50%,-50%) scale(.9)}
+    50%{transform:translate(-50%,-50%) scale(1.15)}
 }
 
-/* ================= TITLE ================= */
 
-.title {
-    position: fixed;
-    top: 35px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
+/* TITLE */
 
-    text-align: center;
-    white-space: nowrap;
+.title{
+    position:fixed;
+    top:28px;
+    left:50%;
+    transform:translateX(-50%);
 
-    font-size: clamp(24px, 4vw, 42px);
-    font-weight: 700;
-    letter-spacing: 2px;
+    z-index:20;
 
-    background: linear-gradient(
+    font-size:clamp(25px,4vw,45px);
+    font-weight:bold;
+    letter-spacing:2px;
+
+    white-space:nowrap;
+
+    background:linear-gradient(
         90deg,
-        #ff7eb3,
-        #ffffff,
-        #ff4f9a
+        #ff4f9a,
+        #fff,
+        #ff65ad
     );
 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 
-    filter: drop-shadow(0 0 12px rgba(255, 80, 160, .8));
-
-    animation: titleFloat 3s ease-in-out infinite;
+    filter:drop-shadow(0 0 15px #ff3f9f);
 }
 
-.subtitle {
-    position: fixed;
-    top: 88px;
-    left: 50%;
-    transform: translateX(-50%);
 
-    z-index: 20;
+/* ROTATING HEART SCENE */
 
-    color: rgba(255,255,255,.65);
-    font-size: 13px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-}
+.scene{
+    position:absolute;
 
-@keyframes titleFloat {
-    0%,100% {
-        transform: translateX(-50%) translateY(0);
-    }
+    left:50%;
+    top:53%;
 
-    50% {
-        transform: translateX(-50%) translateY(-6px);
-    }
-}
-
-/* ================= HEART ================= */
-
-.heart-area {
-    position: absolute;
-    width: min(650px, 90vw);
-    height: min(650px, 80vh);
-
-    left: 50%;
-    top: 53%;
+    width:min(650px,90vw);
+    height:min(650px,75vh);
 
     transform:
-        translate(-50%, -50%)
-        perspective(900px);
-
-    transition: transform .15s ease-out;
+        translate(-50%,-50%)
+        rotateX(0deg)
+        rotateY(0deg);
 }
 
-.heart-text {
-    position: absolute;
 
-    color: #ffc0df;
+/*
+    THIS IS THE IMPORTANT PART
 
-    font-size: clamp(7px, 1vw, 11px);
-    font-weight: 600;
+    Thousands of I LOVE YOU stay together
+    and the WHOLE group rotates.
+*/
 
-    white-space: nowrap;
+.heart{
+    position:absolute;
 
-    transform-origin: center;
+    width:100%;
+    height:100%;
+
+    left:0;
+    top:0;
+
+    transform-style:preserve-3d;
+
+    animation:
+        rotateHeart 12s linear infinite,
+        heartBeat 2.2s ease-in-out infinite;
+}
+
+
+@keyframes rotateHeart{
+
+    0%{
+        transform:rotateZ(0deg) rotateY(0deg);
+    }
+
+    25%{
+        transform:rotateZ(90deg) rotateY(12deg);
+    }
+
+    50%{
+        transform:rotateZ(180deg) rotateY(0deg);
+    }
+
+    75%{
+        transform:rotateZ(270deg) rotateY(-12deg);
+    }
+
+    100%{
+        transform:rotateZ(360deg) rotateY(0deg);
+    }
+}
+
+
+@keyframes heartBeat{
+
+    0%,100%{
+        scale:1;
+    }
+
+    50%{
+        scale:1.045;
+    }
+}
+
+
+/* EACH I LOVE YOU */
+
+.love{
+    position:absolute;
+
+    color:#ffb6da;
+
+    font-size:10px;
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    transform-style:preserve-3d;
 
     text-shadow:
         0 0 4px #ff69b4,
-        0 0 9px #ff3f9f,
-        0 0 18px rgba(255, 50, 150, .9);
+        0 0 8px #ff1493,
+        0 0 15px #ff1493,
+        0 0 25px rgba(255,20,147,.8);
 
-    opacity: .82;
+    opacity:.85;
 
-    animation:
-        textGlow 2s ease-in-out infinite alternate,
-        textFloat 4s ease-in-out infinite;
+    transition:opacity .3s;
+
+    animation:textGlow 1.8s ease-in-out infinite alternate;
 }
 
-@keyframes textGlow {
 
-    from {
-        opacity: .45;
-        filter: blur(.2px);
+@keyframes textGlow{
+
+    from{
+        opacity:.45;
     }
 
-    to {
-        opacity: 1;
-        filter: blur(0);
+    to{
+        opacity:1;
     }
-
 }
 
-@keyframes textFloat {
 
-    0%,100% {
-        margin-top: 0;
-    }
+/* CENTER */
 
-    50% {
-        margin-top: -2px;
-    }
+.center{
+    position:absolute;
 
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    z-index:10;
+
+    text-align:center;
+
+    pointer-events:none;
 }
 
-/* ================= CENTER ================= */
+.center h1{
 
-.center-message {
+    font-size:clamp(28px,6vw,60px);
 
-    position: absolute;
+    letter-spacing:3px;
 
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    z-index: 10;
-
-    text-align: center;
-
-    pointer-events: none;
-
-    animation: centerBeat 1.8s ease-in-out infinite;
-}
-
-.center-message .main {
-
-    font-size: clamp(28px, 6vw, 58px);
-
-    font-weight: 800;
-
-    letter-spacing: 3px;
-
-    background: linear-gradient(
+    background:linear-gradient(
         135deg,
-        #ffffff,
-        #ffb5d8,
-        #ff4f9a
+        white,
+        #ffb6da,
+        #ff3f9f
     );
 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 
     filter:
-        drop-shadow(0 0 8px #ff4f9a)
-        drop-shadow(0 0 22px rgba(255, 50, 150, .8));
+        drop-shadow(0 0 8px #ff1493)
+        drop-shadow(0 0 25px #ff1493);
 }
 
-.center-message .small {
+.center p{
 
-    margin-top: 8px;
+    margin-top:8px;
 
-    font-size: 12px;
+    color:rgba(255,255,255,.65);
 
-    letter-spacing: 5px;
+    font-size:11px;
 
-    color: rgba(255,255,255,.65);
+    letter-spacing:5px;
 }
 
-@keyframes centerBeat {
 
-    0%,100% {
-        transform: translate(-50%, -50%) scale(1);
-    }
+/* PARTICLES */
 
-    50% {
-        transform: translate(-50%, -50%) scale(1.08);
-    }
+.particle{
 
-}
+    position:fixed;
 
-/* ================= PARTICLES ================= */
+    border-radius:50%;
 
-.particle {
-
-    position: fixed;
-
-    width: 3px;
-    height: 3px;
-
-    border-radius: 50%;
-
-    background: #ff9ac8;
+    background:#ff7fbd;
 
     box-shadow:
-        0 0 5px #ff69b4,
-        0 0 12px #ff69b4;
+        0 0 7px #ff1493,
+        0 0 15px #ff1493;
 
-    pointer-events: none;
+    pointer-events:none;
 
-    animation: particleMove linear infinite;
+    animation:floatUp linear infinite;
 }
 
-@keyframes particleMove {
+@keyframes floatUp{
 
-    from {
-        transform: translateY(110vh) scale(.2);
-        opacity: 0;
+    from{
+        transform:translateY(110vh);
+        opacity:0;
     }
 
-    15% {
-        opacity: 1;
+    15%{
+        opacity:1;
     }
 
-    85% {
-        opacity: 1;
+    85%{
+        opacity:1;
     }
 
-    to {
-        transform: translateY(-10vh) scale(1);
-        opacity: 0;
+    to{
+        transform:translateY(-10vh);
+        opacity:0;
     }
-
 }
 
-/* ================= BOTTOM ================= */
 
-.footer {
+/* FOOTER */
 
-    position: fixed;
+.footer{
 
-    bottom: 20px;
-    left: 50%;
+    position:fixed;
 
-    transform: translateX(-50%);
+    bottom:18px;
+    left:50%;
 
-    color: rgba(255,255,255,.35);
+    transform:translateX(-50%);
 
-    font-size: 11px;
+    color:rgba(255,255,255,.35);
 
-    letter-spacing: 2px;
+    font-size:10px;
 
-    z-index: 20;
+    letter-spacing:3px;
 
-    white-space: nowrap;
+    white-space:nowrap;
 }
 
-/* ================= MOBILE ================= */
 
-@media (max-width: 600px) {
+/* MOBILE */
 
-    .subtitle {
-        top: 75px;
-        font-size: 9px;
-        letter-spacing: 3px;
+@media(max-width:600px){
+
+    .scene{
+        width:105vw;
+        height:65vh;
     }
 
-    .heart-area {
-        width: 100vw;
-        height: 65vh;
-        top: 52%;
+    .love{
+        font-size:7px;
     }
 
-    .center-message .small {
-        font-size: 9px;
+    .center h1{
+        font-size:30px;
     }
 
-    .footer {
-        font-size: 9px;
-        bottom: 12px;
+    .center p{
+        font-size:8px;
+        letter-spacing:3px;
     }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
-<div class="background">
-    <div class="glow"></div>
-</div>
+<div class="bgGlow"></div>
 
-<!-- TITLE -->
 <div class="title">
     I Love You ❤️
 </div>
 
-<div class="subtitle">
-    Made with love
-</div>
 
-<!-- HEART -->
-<div class="heart-area" id="heart">
+<div class="scene" id="scene">
 
-    <div class="center-message">
-        <div class="main">I LOVE YOU</div>
-        <div class="small">FOREVER • ❤️ • ALWAYS</div>
+    <div class="heart" id="heart">
+
+        <div class="center">
+            <h1>I LOVE YOU</h1>
+            <p>FOREVER • ALWAYS • ❤️</p>
+        </div>
+
     </div>
 
 </div>
 
+
 <div class="footer">
-    A little heart, made just for you ✨
+    MADE WITH LOVE ✨
 </div>
 
 
 <script>
 
-/* =====================================================
-   HEART TEXT
-===================================================== */
+/* =========================================
+   CREATE THE CONNECTED HEART
+========================================= */
 
 const heart = document.getElementById("heart");
 
-const total = 420;
+const total = 850;
 
 const width = heart.clientWidth;
 const height = heart.clientHeight;
@@ -394,226 +387,195 @@ const height = heart.clientHeight;
 const centerX = width / 2;
 const centerY = height / 2;
 
-const scale = Math.min(width, height) / 38;
+const scale = Math.min(width,height) / 38;
 
-for (let i = 0; i < total; i++) {
 
-    const t = Math.PI * 2 * i / total;
+/*
+   Mathematical heart
+*/
 
-    /*
-       Mathematical heart equation
-    */
+for(let i=0;i<total;i++){
+
+    const t =
+        Math.PI * 2 * i / total;
+
 
     const x =
-        16 * Math.pow(Math.sin(t), 3);
+        16 * Math.pow(Math.sin(t),3);
+
 
     const y =
         13 * Math.cos(t)
-        - 5 * Math.cos(2 * t)
-        - 2 * Math.cos(3 * t)
-        - Math.cos(4 * t);
+        - 5 * Math.cos(2*t)
+        - 2 * Math.cos(3*t)
+        - Math.cos(4*t);
 
-    const posX =
-        centerX + x * scale;
 
-    const posY =
-        centerY - y * scale;
+    /*
+       Add several layers.
+       This makes the heart look like
+       thousands of words are tied together.
+    */
 
-    const text =
+    const layer =
+        (i % 7) - 3;
+
+
+    const xPos =
+        centerX +
+        x * scale +
+        layer * 1.7;
+
+
+    const yPos =
+        centerY -
+        y * scale +
+        layer * 1.7;
+
+
+    const love =
         document.createElement("div");
 
-    text.className = "heart-text";
 
-    text.innerHTML =
-        i % 3 === 0
+    love.className="love";
+
+
+    love.innerHTML =
+        i % 5 === 0
         ? "I LOVE YOU ❤️"
         : "I love you";
 
-    text.style.left =
-        posX + "px";
 
-    text.style.top =
-        posY + "px";
+    love.style.left =
+        xPos+"px";
+
+
+    love.style.top =
+        yPos+"px";
+
 
     /*
-       Rotation follows the heart curve
+       Follow the heart curve
     */
 
     const angle =
-        Math.atan2(y, x) * 180 / Math.PI;
+        Math.atan2(y,x) *
+        180 / Math.PI;
 
-    text.style.transform =
-        `translate(-50%, -50%) rotate(${angle + 90}deg)`;
+
+    love.style.transform =
+        `
+        translate(-50%,-50%)
+        rotate(${angle+90}deg)
+        translateZ(${layer*5}px)
+        `;
+
 
     /*
-       Random animation timing
+       Slightly different glow timing
     */
 
-    text.style.animationDelay =
-        `${Math.random() * 2}s`;
+    love.style.animationDelay =
+        (Math.random()*2)+"s";
 
-    heart.appendChild(text);
+
+    heart.appendChild(love);
 }
 
 
-/* =====================================================
+/* =========================================
    FLOATING PARTICLES
-===================================================== */
+========================================= */
 
-for (let i = 0; i < 90; i++) {
+for(let i=0;i<100;i++){
 
-    const particle =
+    const p =
         document.createElement("div");
 
-    particle.className = "particle";
+    p.className="particle";
 
-    particle.style.left =
-        Math.random() * 100 + "vw";
-
-    particle.style.animationDuration =
-        (5 + Math.random() * 10) + "s";
-
-    particle.style.animationDelay =
-        (-Math.random() * 15) + "s";
+    p.style.left =
+        Math.random()*100+"vw";
 
     const size =
-        1 + Math.random() * 4;
+        1 + Math.random()*4;
 
-    particle.style.width =
-        size + "px";
+    p.style.width=size+"px";
+    p.style.height=size+"px";
 
-    particle.style.height =
-        size + "px";
+    p.style.animationDuration =
+        5 + Math.random()*12+"s";
 
-    document.body.appendChild(particle);
+    p.style.animationDelay =
+        -Math.random()*15+"s";
+
+    document.body.appendChild(p);
 }
 
 
-/* =====================================================
-   MOUSE PARALLAX EFFECT
-===================================================== */
+/* =========================================
+   MOUSE 3D CONTROL
+========================================= */
 
-const heartArea =
-    document.querySelector(".heart-area");
-
-document.addEventListener("mousemove", (event) => {
-
-    const x =
-        (event.clientX / window.innerWidth - .5);
-
-    const y =
-        (event.clientY / window.innerHeight - .5);
-
-    heartArea.style.transform =
-        `
-        translate(-50%, -50%)
-        perspective(900px)
-        rotateY(${x * 8}deg)
-        rotateX(${-y * 8}deg)
-        scale(1.02)
-        `;
-});
+const scene =
+    document.getElementById("scene");
 
 
-/* =====================================================
-   TOUCH EFFECT FOR MOBILE
-===================================================== */
+document.addEventListener(
+    "mousemove",
+    e => {
 
-document.addEventListener("touchmove", (event) => {
-
-    const touch =
-        event.touches[0];
-
-    const x =
-        (touch.clientX / window.innerWidth - .5);
-
-    const y =
-        (touch.clientY / window.innerHeight - .5);
-
-    heartArea.style.transform =
-        `
-        translate(-50%, -50%)
-        perspective(900px)
-        rotateY(${x * 6}deg)
-        rotateX(${-y * 6}deg)
-        scale(1.02)
-        `;
-
-}, { passive: true });
+        const x =
+            (e.clientX /
+            window.innerWidth - .5);
 
 
-/* =====================================================
-   HEART CLICK EFFECT
-===================================================== */
+        const y =
+            (e.clientY /
+            window.innerHeight - .5);
 
-document.addEventListener("click", (event) => {
 
-    for (let i = 0; i < 12; i++) {
-
-        const spark =
-            document.createElement("div");
-
-        spark.style.position = "fixed";
-
-        spark.style.left =
-            event.clientX + "px";
-
-        spark.style.top =
-            event.clientY + "px";
-
-        spark.style.width = "6px";
-        spark.style.height = "6px";
-
-        spark.style.borderRadius = "50%";
-
-        spark.style.background = "#ff8fc5";
-
-        spark.style.boxShadow =
-            "0 0 12px #ff4f9a";
-
-        spark.style.pointerEvents =
-            "none";
-
-        spark.style.zIndex = "100";
-
-        const angle =
-            Math.random() * Math.PI * 2;
-
-        const distance =
-            40 + Math.random() * 100;
-
-        const dx =
-            Math.cos(angle) * distance;
-
-        const dy =
-            Math.sin(angle) * distance;
-
-        spark.animate(
-            [
-                {
-                    transform: "translate(0,0) scale(1)",
-                    opacity: 1
-                },
-                {
-                    transform:
-                        `translate(${dx}px,${dy}px) scale(0)`,
-                    opacity: 0
-                }
-            ],
-            {
-                duration: 700 + Math.random() * 500,
-                easing: "cubic-bezier(.2,.8,.3,1)"
-            }
-        );
-
-        document.body.appendChild(spark);
-
-        setTimeout(() => {
-            spark.remove();
-        }, 1300);
+        scene.style.transform =
+            `
+            translate(-50%,-50%)
+            rotateX(${-y*12}deg)
+            rotateY(${x*12}deg)
+            `;
     }
+);
 
-});
+
+/* =========================================
+   TOUCH CONTROL
+========================================= */
+
+document.addEventListener(
+    "touchmove",
+    e => {
+
+        const touch =
+            e.touches[0];
+
+
+        const x =
+            touch.clientX /
+            window.innerWidth - .5;
+
+
+        const y =
+            touch.clientY /
+            window.innerHeight - .5;
+
+
+        scene.style.transform =
+            `
+            translate(-50%,-50%)
+            rotateX(${-y*8}deg)
+            rotateY(${x*8}deg)
+            `;
+    },
+    {passive:true}
+);
 
 </script>
 

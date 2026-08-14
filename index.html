@@ -22,27 +22,28 @@ html,body{
 body{
     background:
         radial-gradient(
-            circle at 50% 48%,
-            #310b29 0%,
-            #150713 35%,
+            circle at 50% 50%,
+            #300b29 0%,
+            #130611 38%,
             #050205 72%,
-            #000 100%
+            #000000 100%
         );
 
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     color:white;
 }
 
 
-/* ================= BACKGROUND ================= */
+/* ================= BACKGROUND GLOW ================= */
 
-.bg-glow{
+.glow{
     position:fixed;
-    width:700px;
-    height:700px;
+
+    width:650px;
+    height:650px;
 
     left:50%;
-    top:52%;
+    top:50%;
 
     transform:translate(-50%,-50%);
 
@@ -51,28 +52,30 @@ body{
     background:
         radial-gradient(
             circle,
-            rgba(255,20,147,.22),
-            rgba(255,20,147,.08) 40%,
-            transparent 70%
+            rgba(255,20,147,.18),
+            transparent 68%
         );
 
-    filter:blur(25px);
+    filter:blur(30px);
 
-    animation:pulse 4s ease-in-out infinite;
+    animation:glowPulse 5s ease-in-out infinite;
 }
 
-@keyframes pulse{
+@keyframes glowPulse{
+
     0%,100%{
-        transform:translate(-50%,-50%) scale(.92);
+        opacity:.7;
+        transform:translate(-50%,-50%) scale(.95);
     }
 
     50%{
+        opacity:1;
         transform:translate(-50%,-50%) scale(1.08);
     }
 }
 
 
-/* ================= TOP TITLE ================= */
+/* ================= TITLE ================= */
 
 .title{
     position:fixed;
@@ -82,40 +85,33 @@ body{
 
     transform:translateX(-50%);
 
-    z-index:50;
+    z-index:100;
 
     white-space:nowrap;
 
-    font-size:clamp(27px,4vw,46px);
+    font-size:clamp(28px,4vw,46px);
 
     font-weight:bold;
 
     letter-spacing:2px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #ff4d9d,
-            #ffffff,
-            #ff4d9d
-        );
+    color:#ff7fbd;
 
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-
-    filter:
-        drop-shadow(0 0 10px #ff1493)
-        drop-shadow(0 0 25px #ff1493);
+    text-shadow:
+        0 0 8px #ff1493,
+        0 0 20px #ff1493,
+        0 0 40px rgba(255,20,147,.7);
 }
 
 
-/* ================= HEART ================= */
+/* ================= HEART SCENE ================= */
 
 .scene{
+
     position:absolute;
 
-    width:min(700px,92vw);
-    height:min(680px,76vh);
+    width:min(720px,92vw);
+    height:min(680px,78vh);
 
     left:50%;
     top:53%;
@@ -123,7 +119,11 @@ body{
     transform:translate(-50%,-50%);
 }
 
+
+/* ================= HEART ================= */
+
 .heart{
+
     position:absolute;
 
     width:100%;
@@ -134,38 +134,54 @@ body{
 }
 
 
-/* ================= SMALL I LOVE YOU ================= */
+/* ================= SMALL WORDS ================= */
 
 .love{
+
     position:absolute;
 
     white-space:nowrap;
 
-    transform:
-        translate(-50%,-50%) !important;
+    left:0;
+    top:0;
 
-    color:#ffb9dc;
+    color:#ffb6dc;
 
-    font-size:10px;
+    font-size:9px;
 
     font-weight:bold;
 
-    letter-spacing:.1px;
-
-    text-shadow:
-        0 0 4px #ff69b4,
-        0 0 9px #ff1493,
-        0 0 17px #ff1493;
+    letter-spacing:.15px;
 
     pointer-events:none;
 
     user-select:none;
+
+    will-change:
+        transform,
+        opacity;
+
+    transform-origin:center center;
+
+    text-shadow:
+        0 0 3px rgba(255,105,180,.9),
+        0 0 7px rgba(255,20,147,.8);
+
+    /*
+       Very important:
+       browser-ke smooth rendering
+    */
+
+    backface-visibility:hidden;
+
+    -webkit-font-smoothing:antialiased;
 }
 
 
-/* ================= CENTER ================= */
+/* ================= CENTER MESSAGE ================= */
 
 .center{
+
     position:absolute;
 
     left:50%;
@@ -173,48 +189,40 @@ body{
 
     transform:translate(-50%,-50%);
 
+    width:100%;
+
     text-align:center;
 
-    z-index:20;
-
-    width:100%;
+    z-index:50;
 
     pointer-events:none;
 }
 
 .center h1{
+
     font-size:clamp(
         34px,
         6vw,
         64px
     );
 
-    font-weight:bold;
-
     letter-spacing:4px;
 
-    line-height:1.05;
+    font-weight:bold;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #ffb7db,
-            #ff3f9f
-        );
+    color:#ffb4d9;
 
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-
-    filter:
-        drop-shadow(0 0 8px #ff1493)
-        drop-shadow(0 0 24px #ff1493);
+    text-shadow:
+        0 0 8px #ff1493,
+        0 0 20px #ff1493,
+        0 0 45px rgba(255,20,147,.8);
 }
 
 .center p{
-    margin-top:13px;
 
-    font-size:11px;
+    margin-top:12px;
+
+    font-size:10px;
 
     letter-spacing:6px;
 
@@ -225,15 +233,16 @@ body{
 /* ================= PARTICLES ================= */
 
 .particle{
+
     position:fixed;
 
     border-radius:50%;
 
-    background:#ff69b4;
+    background:#ff5cab;
 
     box-shadow:
         0 0 6px #ff1493,
-        0 0 15px #ff1493;
+        0 0 14px #ff1493;
 
     pointer-events:none;
 
@@ -244,32 +253,33 @@ body{
 @keyframes floatUp{
 
     from{
-        transform:translateY(110vh);
+        transform:translate3d(0,110vh,0);
         opacity:0;
     }
 
     15%{
-        opacity:1;
+        opacity:.8;
     }
 
     85%{
-        opacity:1;
+        opacity:.8;
     }
 
     to{
-        transform:translateY(-10vh);
+        transform:translate3d(0,-10vh,0);
         opacity:0;
     }
 }
 
 
-/* ================= PREMIUM CREDIT ================= */
+/* ================= CREDIT ================= */
 
 .credit{
+
     position:fixed;
 
     left:50%;
-    bottom:20px;
+    bottom:18px;
 
     transform:translateX(-50%);
 
@@ -280,52 +290,35 @@ body{
     align-items:center;
     justify-content:center;
 
-    gap:13px;
+    gap:12px;
 
-    padding:10px 22px;
-
-    min-width:260px;
-
-    border:1px solid rgba(255,72,166,.65);
+    padding:9px 21px;
 
     border-radius:30px;
 
+    border:1px solid rgba(255,72,166,.7);
+
     background:
-        linear-gradient(
-            135deg,
-            rgba(255,20,147,.14),
-            rgba(255,255,255,.04)
-        );
+        rgba(255,20,147,.08);
 
     box-shadow:
-        0 0 10px rgba(255,20,147,.35),
+        0 0 12px rgba(255,20,147,.35),
         inset 0 0 15px rgba(255,20,147,.08);
 
     backdrop-filter:blur(10px);
 
-    color:rgba(255,255,255,.72);
+    color:rgba(255,255,255,.65);
 
-    font-size:10px;
+    font-size:9px;
 
     letter-spacing:3px;
 
     white-space:nowrap;
 }
 
-.credit .heart-icon{
-    color:#ff4fa3;
+.name{
 
-    font-size:14px;
-
-    filter:
-        drop-shadow(0 0 6px #ff1493);
-
-    animation:
-        heartBeat 1.4s ease-in-out infinite;
-}
-
-.credit .name{
-    color:#ff70b8;
+    color:#ff69b4;
 
     font-weight:bold;
 
@@ -333,10 +326,22 @@ body{
 
     text-shadow:
         0 0 7px #ff1493,
-        0 0 15px rgba(255,20,147,.8);
+        0 0 16px #ff1493;
 }
 
-@keyframes heartBeat{
+.heartIcon{
+
+    color:#ff4fa3;
+
+    font-size:13px;
+
+    filter:
+        drop-shadow(0 0 6px #ff1493);
+
+    animation:beat 1.4s ease-in-out infinite;
+}
+
+@keyframes beat{
 
     0%,100%{
         transform:scale(1);
@@ -353,12 +358,12 @@ body{
 @media(max-width:600px){
 
     .scene{
-        width:108vw;
-        height:67vh;
+        width:110vw;
+        height:68vh;
     }
 
     .love{
-        font-size:7px;
+        font-size:6.5px;
     }
 
     .center h1{
@@ -371,48 +376,34 @@ body{
     }
 
     .credit{
-        bottom:12px;
-
-        padding:8px 15px;
-
-        min-width:auto;
-
-        font-size:8px;
-
-        letter-spacing:2px;
-    }
-
-    .credit .name{
-        letter-spacing:3px;
+        bottom:10px;
+        padding:8px 14px;
+        font-size:7px;
+        gap:8px;
     }
 }
 </style>
 </head>
 
+
 <body>
 
 
-<!-- Background -->
-<div class="bg-glow"></div>
+<div class="glow"></div>
 
 
-<!-- Title -->
 <div class="title">
     I Love You ❤️
 </div>
 
 
-<!-- Heart -->
 <div class="scene">
 
     <div class="heart" id="heart">
 
-        <!-- Center message -->
         <div class="center">
 
-            <h1>
-                I LOVE YOU
-            </h1>
+            <h1>I LOVE YOU</h1>
 
             <p>
                 FOREVER • ALWAYS • ❤️
@@ -425,20 +416,15 @@ body{
 </div>
 
 
-<!-- Premium Credit -->
 <div class="credit">
 
-    <span class="heart-icon">♥</span>
+    <span class="heartIcon">♥</span>
 
-    <span>
-        MADE WITH LOVE BY
-    </span>
+    <span>MADE WITH LOVE BY</span>
 
-    <span class="name">
-        ROBIUL
-    </span>
+    <span class="name">ROBIUL</span>
 
-    <span class="heart-icon">♥</span>
+    <span class="heartIcon">♥</span>
 
 </div>
 
@@ -446,21 +432,97 @@ body{
 <script>
 
 /* =========================================
-   HEART SETTINGS
+   SETTINGS
 ========================================= */
 
 const heart =
     document.getElementById("heart");
 
-const total =
-    900;
+const TOTAL =
+    1000;
 
 
 /* =========================================
-   HEART DIMENSIONS
+   HEART SETUP
 ========================================= */
 
-function setup(){
+const words=[];
+
+
+/* =========================================
+   CREATE WORDS
+========================================= */
+
+for(let i=0;i<TOTAL;i++){
+
+    const word =
+        document.createElement("div");
+
+    word.className="love";
+
+    word.textContent =
+        i % 12 === 0
+        ? "I LOVE YOU ♥"
+        : "I love you";
+
+    heart.appendChild(word);
+
+    words.push(word);
+}
+
+
+/* =========================================
+   HEART MATHEMATICAL PATH
+========================================= */
+
+function getHeartPoint(t,scale,cx,cy){
+
+    const x =
+        16 *
+        Math.pow(
+            Math.sin(t),
+            3
+        );
+
+    const y =
+        13*Math.cos(t)
+        -5*Math.cos(2*t)
+        -2*Math.cos(3*t)
+        -Math.cos(4*t);
+
+    return {
+
+        x:cx + x*scale,
+
+        y:cy - y*scale
+    };
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+let startTime =
+    performance.now();
+
+
+function animate(now){
+
+    const elapsed =
+        now - startTime;
+
+
+    /*
+       MUCH SLOWER MOVEMENT
+
+       This is the main change
+       that makes the words look smooth.
+    */
+
+    const movement =
+        elapsed * 0.000055;
+
 
     const width =
         heart.clientWidth;
@@ -468,199 +530,143 @@ function setup(){
     const height =
         heart.clientHeight;
 
-    const centerX =
-        width / 2;
 
-    const centerY =
-        height / 2;
+    const cx =
+        width/2;
+
+    const cy =
+        height/2;
+
 
     const scale =
-        Math.min(width,height) / 38;
+        Math.min(
+            width,
+            height
+        ) / 38;
 
 
-    /* =====================================
-       CREATE 900 SMALL I LOVE YOU
-    ===================================== */
+    for(let i=0;i<words.length;i++){
 
-    const words=[];
-
-
-    for(let i=0;i<total;i++){
-
-        const love =
-            document.createElement("div");
-
-        love.className="love";
-
-        love.textContent =
-            i % 9 === 0
-            ? "I LOVE YOU ♥"
-            : "I love you";
-
-        love.dataset.index=i;
-
-        heart.appendChild(love);
-
-        words.push(love);
-    }
+        const word =
+            words[i];
 
 
-    /* =====================================
-       HEART EQUATION
-    ===================================== */
+        /*
+           Each word has a fixed
+           position around the heart.
 
-    function heartPosition(t){
+           They move continuously
+           instead of jumping.
+        */
 
-        const x =
-            16 *
-            Math.pow(
-                Math.sin(t),
-                3
+        const baseAngle =
+            (i / TOTAL) *
+            Math.PI * 2;
+
+
+        const angle =
+            baseAngle + movement;
+
+
+        const point =
+            getHeartPoint(
+                angle,
+                scale,
+                cx,
+                cy
             );
 
+
+        /*
+           Very tiny floating movement.
+           Makes the whole thing feel alive.
+        */
+
+        const smoothWave =
+            Math.sin(
+                angle * 6
+            ) * 0.7;
+
+
+        const x =
+            point.x + smoothWave;
+
         const y =
-            13*Math.cos(t)
-            -5*Math.cos(2*t)
-            -2*Math.cos(3*t)
-            -Math.cos(4*t);
+            point.y + smoothWave;
 
-        return{
 
-            x:
-                centerX +
-                x*scale,
+        /*
+           IMPORTANT:
 
-            y:
-                centerY -
-                y*scale
-        };
+           Text NEVER rotates.
+
+           So "I love you"
+           always stays readable.
+        */
+
+        word.style.transform =
+            `translate3d(
+                ${x}px,
+                ${y}px,
+                0
+            ) translate(-50%,-50%)`;
+
+
+        /*
+           Gentle brightness
+        */
+
+        word.style.opacity =
+            0.62 +
+            Math.sin(
+                angle * 4
+            ) * 0.18;
     }
 
 
-    /* =====================================
-       ANIMATION
-       
-       ONLY SMALL WORDS MOVE.
-
-       HEART NEVER ROTATES.
-
-       TEXT NEVER TURNS UPSIDE DOWN.
-    ===================================== */
-
-    let time=0;
-
-
-    function animate(){
-
-        time += 0.0017;
-
-
-        words.forEach(
-            (love,i)=>{
-
-                const base =
-                    (i/total) *
-                    Math.PI*2;
-
-
-                const t =
-                    base + time;
-
-
-                const pos =
-                    heartPosition(t);
-
-
-                /*
-                   Tiny natural movement
-                */
-
-                const wave =
-                    Math.sin(t*5)*1.2;
-
-
-                love.style.left =
-                    (pos.x+wave)+"px";
-
-
-                love.style.top =
-                    (pos.y+wave)+"px";
-
-
-                /*
-                   IMPORTANT:
-
-                   Text stays straight.
-                */
-
-                love.style.transform =
-                    "translate(-50%,-50%)";
-
-
-                /*
-                   Soft brightness variation
-                */
-
-                const glow =
-                    .68 +
-                    Math.sin(t*3)*.2;
-
-                love.style.opacity =
-                    glow;
-            }
-        );
-
-
-        requestAnimationFrame(
-            animate
-        );
-    }
-
-
-    animate();
+    requestAnimationFrame(
+        animate
+    );
 }
 
 
-/* Start */
-setup();
+requestAnimationFrame(
+    animate
+);
 
 
 /* =========================================
-   BACKGROUND PARTICLES
+   BACKGROUND STARS
 ========================================= */
 
 for(let i=0;i<120;i++){
 
-    const particle =
+    const p =
         document.createElement("div");
 
-    particle.className="particle";
-
-    particle.style.left =
-        Math.random()*100+"vw";
+    p.className="particle";
 
 
     const size =
-        1+Math.random()*4;
+        1 + Math.random()*3;
 
-    particle.style.width =
+    p.style.width =
         size+"px";
 
-    particle.style.height =
+    p.style.height =
         size+"px";
 
+    p.style.left =
+        Math.random()*100+"vw";
 
-    particle.style.animationDuration =
-        6+Math.random()*12+"s";
+    p.style.animationDuration =
+        (7+Math.random()*12)+"s";
+
+    p.style.animationDelay =
+        (-Math.random()*15)+"s";
 
 
-    particle.style.animationDelay =
-        -Math.random()*15+"s";
-
-
-    document.body.appendChild(
-        particle
-    );
+    document.body.appendChild(p);
 }
 
 </script>
